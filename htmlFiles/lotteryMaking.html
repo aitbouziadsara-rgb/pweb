@@ -1,16 +1,31 @@
 <!DOCTYPE html>
-
-<head>
-    <link rel="stylesheet" href="lotteryMakingStyle.css">
-</head>
-<body>
-    <h1 id="lotteryMakingTitle">make a lottery</h1>
-    <p id="lotteryMakingPara">enter the informations</p>
-    <div>
-        <input id="name">
-        <input id="dataStart">
-        <input id="dateEnd">
-        <input id="theDate">
-        <input id="numberOfWinners">
+<html>
+ <head>
+    <link rel="stylesheet" href="../cssFiles/lotteryMakingStyle.css">
+ </head>
+  <body>
+    <div id="lotteryFlex">
+     <aside id="sideBarUser">
+         <button class="sideBarButton">account management</button>
+         <button class="sideBarButton">notifs</button>
+         <button class="sideBarButton">results</button>
+         <button class="sideBarButton">lottery making</button>
+     </aside>
+     <div id="lotteryMakingFlex">
+        <h1 id="lotteryMakingTitle">make a lottery</h1>
+       <div id="inputs">
+        <label>start of inscriptions date :</label>
+        <input  type="date" class="inputLotteryMaking">
+        <label>end of inscriptions date:</label>
+        <input type="date" class="inputLotteryMaking">
+        <label>number of winners :</label>
+        <input placeholder="number of winners" type="text" class="inputLotteryMaking">
+        <label>lottery date :</label>
+        <input type="date" class="inputLotteryMaking">
+       </div>
+       <button id="buttonLotteryMaking">admit it</button>
+     </div>
     </div>
-</body>
+    </body>
+ </body>
+</html>
