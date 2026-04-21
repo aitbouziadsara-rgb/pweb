@@ -4,10 +4,13 @@ document.getElementById("registerForm").addEventListener("submit", function(e) {
 
     // 📥 Récupération des valeurs
     let fullName = document.getElementById("nom_prenom").value;
+    let fatherName = document.getElementById("prenom_pere").value;
+    let grandFatherName = document.getElementById("prenom_grand_pere").value;
     let cin = document.getElementById("cin").value;
     let birthdate = document.getElementById("birthdate").value;
     let email = document.getElementById("email").value;
     let phone = document.getElementById("phone").value;
+    let motherfullName = document.getElementById("prenom_nom_mere").value;
 
     // 📌 tableau des erreurs
     let errors = [];
@@ -18,12 +21,35 @@ document.getElementById("registerForm").addEventListener("submit", function(e) {
     }
 
     // 🧾 2. validation des noms et prenoms
-     let namePattern = /^[A-Za-z\s]+$/;
+     let namePattern = /^[A-Za-z\s]+$/;   //\s =espace + tabulation + saut de ligne
 
     if(fullName && !namePattern.test(fullName)){    //test est une méthode qui vérifie si le nom correspond au pattern
     errors.push("Le nom doit contenir uniquement des lettres");
     }
 
+
+    // 👨 prénom du père
+    if(fatherName && !namePattern.test(fatherName)){ 
+    errors.push("Le prénom du père doit contenir uniquement des lettres");
+}
+
+   // 👴 prénom du grand-père
+    if(grandFatherName && !namePattern.test(grandFatherName)){
+    errors.push("Le prénom du grand-père doit contenir uniquement des lettres");
+}
+
+// 👩 prénom de la mèr
+    if(motherfullName && !namePattern.test(motherfullName)){
+    errors.push("Le nom et prénom de la mère doit contenir uniquement des lettres");
+}
+
+
+
+   // 🆔 3. validation CIN
+    let cinPattern = /^[0-9]{8}$/;
+    if(cin && !cinPattern.test(cin)){
+        errors.push("Le CIN doit contenir uniquement 8 chiffres");
+    }
 
     // 📧 3. validation email
     let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -70,5 +96,5 @@ document.getElementById("registerForm").addEventListener("submit", function(e) {
 
     // ✅ succès
     alert("Inscription réussie !");
-    this.submit();
+    this.submit(); //envoie le formulaire si tout est bon
 });
