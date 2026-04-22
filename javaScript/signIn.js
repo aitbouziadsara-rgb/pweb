@@ -1,3 +1,3 @@
 document.getElementById("buttonSignIn").addEventListener("click", function() {
-    window.location.href = "enterInfoPage.html";
+    window.location.href = "Register.html";
 });

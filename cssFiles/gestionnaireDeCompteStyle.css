@@ -58,6 +58,10 @@ body{
     background-color: rgb(183, 163, 14);
 }
 
+#requesButton::active{
+    background-color: rgb(158, 141, 8);
+}
+
 #moreInfo{
     width:100px;
     height:40px;
@@ -106,7 +110,7 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap:10px;
+    gap:20px;
     padding-top: 150px;
     border-radius: 20px;
 }

@@ -1,0 +1,64 @@
+*{
+    font-family: Georgia, 'Times New Roman', Times, serif; /* font global */
+    
+}
+
+/* background */
+body{
+    background: url(https://png.pngtree.com/background/20250102/original/pngtree-holy-hajj-and-umrah-pilgrimage-at-kaaba-in-mecca-for-eid-picture-image_16053840.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    display: flex; /* center form */
+    justify-content: center; /* horizontal center */
+    align-items: center; /* vertical center */
+    height: 100vh; /* full screen height */
+    width: 100vw; /* full screen width */
+}
+
+/* form container */
+#registerForm{
+    display: flex; /* flex layout */
+    flex-direction: column; /* vertical inputs */
+    align-items: center; /* center inputs */
+    gap: 20px; /* space between inputs */
+}
+
+/* title */
+#userInfoTitle{
+    font-size: 50px; /* big title */
+    font-weight: 700; /* bold */
+    color: white; /* better visibility */
+    text-align: center; /* center text */
+}
+
+/* inputs */
+.userInfo{
+    width: 600px; /* input width */
+    height: 45px; /* input height */
+    border-radius: 20px; /* rounded corners */
+    background-color: rgb(237, 227, 146); /* light yellow */
+    border: none; /* remove border */
+    padding-left: 20px; /* text spacing */
+    cursor: text; /* pointer cursor */
+
+}
+
+
+/* button */
+button{
+    width: 200px;
+    height: 45px;
+    border-radius: 20px;
+    border: none;
+    background-color: rgb(37, 132, 210);
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: rgb(32, 115, 183); /* hover effect */
+}
+
+
