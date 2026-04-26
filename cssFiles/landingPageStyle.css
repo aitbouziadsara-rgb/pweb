@@ -40,7 +40,7 @@ body {
     white-space: nowrap; /* pas de retour ligne */
     margin-top: -100px; /* remonte */
     margin-left: -660px; /* décale gauche */
-    display: inline; /* inline */
+    display: inline; /* inline pour ne pas prendre toute la ligne */
     backdrop-filter: blur(5px); /* flou arrière */
 }
 

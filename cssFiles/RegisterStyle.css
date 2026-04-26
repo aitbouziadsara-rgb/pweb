@@ -8,39 +8,45 @@ body{
     background: url(https://png.pngtree.com/background/20250102/original/pngtree-holy-hajj-and-umrah-pilgrimage-at-kaaba-in-mecca-for-eid-picture-image_16053840.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-
-    display: flex; /* center form */
-    justify-content: center; /* horizontal center */
-    align-items: center; /* vertical center */
-    height: 100vh; /* full screen height */
-    width: 100vw; /* full screen width */
+     background-attachment: fixed;   /* fixe le background if the page is scrolled */
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    min-height: 100vh;      /* hauteur minimale de la page */
+    width: 100vw; 
+    padding: 40px   ; 
 }
 
 /* form container */
 #registerForm{
-    display: flex; /* flex layout */
-    flex-direction: column; /* vertical inputs */
-    align-items: center; /* center inputs */
-    gap: 20px; /* space between inputs */
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    gap: 20px; 
+    background-color: rgba(0, 0, 0, 0.45);
+    padding: 40px 50px;
+    border-radius: 20px;
+    backdrop-filter: blur(6px);/* flou arrière */
+  
 }
 
 /* title */
 #userInfoTitle{
-    font-size: 50px; /* big title */
-    font-weight: 700; /* bold */
-    color: white; /* better visibility */
-    text-align: center; /* center text */
+    font-size: 50px; 
+    font-weight: 700; 
+    color: white; 
+    text-align: center;
 }
 
 /* inputs */
 .userInfo{
-    width: 600px; /* input width */
-    height: 45px; /* input height */
-    border-radius: 20px; /* rounded corners */
-    background-color: rgb(237, 227, 146); /* light yellow */
-    border: none; /* remove border */
-    padding-left: 20px; /* text spacing */
-    cursor: text; /* pointer cursor */
+    width: 600px; 
+    height: 45px; 
+    border-radius: 20px; 
+    background-color: rgb(237, 227, 146);
+    border: none; 
+    padding-left: 20px; 
+    cursor: text; 
 
 }
 
@@ -60,5 +66,4 @@ button{
 button:hover{
     background-color: rgb(32, 115, 183); /* hover effect */
 }
-
 

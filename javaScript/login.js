@@ -1,11 +1,11 @@
-document.getElementById("ButtonLogin").addEventListener("click", function() {
+document.getElementById("buttonLogIn").addEventListener("click", function() {
     const email = document.getElementById("gmailLogin").value;
 
-if (!email.includes("@")) {
+ if (!email.includes("@")) {
     alert("Please enter a valid email address.");
-} else {
+ } else {
     window.location.href = "profilUser.html";
-}
+ }
     
 });
 
