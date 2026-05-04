@@ -1,49 +1,46 @@
-document.getElementById("buttonSignIn").addEventListener("click", function(e) {
+document.getElementById("signInForm").addEventListener("submit", function(e) {
 
-    e.preventDefault(); // stop submission
-
-    //  Récupération des valeurs
     let gmail = document.getElementById("gmail").value;
     let password = document.getElementById("password").value;
     let passwordAgain = document.getElementById("passwordAgain").value;
     let verificationCode = document.getElementById("verificationCode").value;
 
-    //  tableau des erreurs
     let errors = [];
 
-    //  1. champs obligatoires
+    // 1. required fields
     if (!gmail || !password || !passwordAgain || !verificationCode) {
         errors.push("Tu as oublié de remplir certains champs obligatoires");
     }
 
-    //  2. validation email
+    // 2. email validation
     let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (gmail && !emailPattern.test(gmail)) {
         errors.push("Email invalide");
     }
 
-    //  3. validation mot de passe (min 8 caractères)
+    // 3. password length
     if (password && password.length < 8) {
-    errors.push("Le mot de passe doit contenir au moins 8 caractères");
-}
+        errors.push("Le mot de passe doit contenir au moins 8 caractères");
+    }
 
-    //  4. confirmation mot de passe
+    // 4. password match
     if (password && passwordAgain && password !== passwordAgain) {
         errors.push("Les mots de passe ne correspondent pas");
     }
 
-    //  5. validation code de vérification (6 chiffres)
+    // 5. verification code
     let codePattern = /^[0-9]{6}$/;
     if (verificationCode && !codePattern.test(verificationCode)) {
         errors.push("Le code de vérification doit contenir exactement 6 chiffres");
     }
 
-    //  6. affichage erreurs
+    // stop submission if errors
     if (errors.length > 0) {
+         e.preventDefault();
         alert(errors.join("\n"));
+       
         return;
     }
 
-    // ✅ succès
-    alert("Compte créé avec succès !");
+  
 });

@@ -1,85 +1,65 @@
 document.getElementById("registerForm").addEventListener("submit", function(e) {
 
-    e.preventDefault(); // stop form submission
-
-    //  Récupération des valeurs
-    let fullName = document.getElementById("nom_prenom").value;
-    let fatherName = document.getElementById("prenom_pere").value;
-    let grandFatherName = document.getElementById("prenom_grand_pere").value;
-    let cin = document.getElementById("cin").value;
-    let birthdate = document.getElementById("birthdate").value;
-    let email = document.getElementById("email").value;
-    let phone = document.getElementById("phone").value;
-    let motherfullName = document.getElementById("prenom_nom_mere").value;
-
-    //  tableau des erreurs
     let errors = [];
 
-    //  1. champs obligatoires
+    // 1. get values
+    let fullName = document.getElementById("nom_prenom").value.trim();
+    let fatherName = document.getElementById("prenom_pere").value.trim();
+    let grandFatherName = document.getElementById("prenom_grand_pere").value.trim();
+    let cin = document.getElementById("cin").value.trim();
+    let birthdate = document.getElementById("birthdate").value;
+    let email = document.getElementById("email").value.trim();
+    let phone = document.getElementById("phone").value.trim();
+    let motherfullName = document.getElementById("prenom_nom_mere").value.trim();
+
+    // 2. required fields
     if(!fullName || !cin || !birthdate || !email || !phone){
-        errors.push("tu as oublié de remplir certians  champs  obligatoires");
+        errors.push("Veuillez remplir tous les champs obligatoires");
     }
 
-    //  2. validation des noms et prenoms
-     let namePattern = /^[A-Za-z\s]+$/;   //\s =espace + tabulation + saut de ligne
+    // 3. name validation
+    let namePattern = /^[A-Za-z\s]+$/;
 
-    if(fullName && !namePattern.test(fullName)){    //test est une méthode qui vérifie si le nom correspond au pattern
-    errors.push("Le nom doit contenir uniquement des lettres");
+    if(fullName && !namePattern.test(fullName)){
+        errors.push("Nom invalide (lettres uniquement)");
     }
 
+    if(fatherName && !namePattern.test(fatherName)){
+        errors.push("Prénom du père invalide");
+    }
 
-    //  prénom du père
-    if(fatherName && !namePattern.test(fatherName)){ 
-    errors.push("Le prénom du père doit contenir uniquement des lettres");
-}
-
-   //  prénom du grand-père
     if(grandFatherName && !namePattern.test(grandFatherName)){
-    errors.push("Le prénom du grand-père doit contenir uniquement des lettres");
-}
-
-//  prénom de la mèr
-    if(motherfullName && !namePattern.test(motherfullName)){
-    errors.push("Le nom et prénom de la mère doit contenir uniquement des lettres");
-}
-
-
-
-   //  3. validation CIN
-    let cinPattern = /^[0-9]{8}$/;
-    if(cin && !cinPattern.test(cin)){
-        errors.push("Le CIN doit contenir uniquement 8 chiffres");
+        errors.push("Prénom du grand-père invalide");
     }
 
-    //  3. validation email
-    let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if(email && !emailPattern.test(email)){
+    if(motherfullName && !namePattern.test(motherfullName)){
+        errors.push("Nom de la mère invalide");
+    }
+
+    // 4. CIN
+    if(cin && !/^[0-9]{18}$/.test(cin)){
+        errors.push("CIN doit contenir 18 chiffres");
+    }
+S
+    // 5. email
+    if(email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
         errors.push("Email invalide");
     }
 
-    //  4. validation téléphone
-    let phonePattern = /^[0-9]{9,10}$/;
-    if(phone && !phonePattern.test(phone)){
-        errors.push("Numéro de téléphone invalide");
+    // 6. phone
+    if(phone && !/^[0-9]{9,10}$/.test(phone)){
+        errors.push("Téléphone invalide");
     }
 
-    //  . calcul âge
+    // 7. age
     if(birthdate){
         let today = new Date();
         let birth = new Date(birthdate);
 
         let age = today.getFullYear() - birth.getFullYear();
-        let monthDiff = today.getMonth() - birth.getMonth();
+        let m = today.getMonth() - birth.getMonth();
 
-
-        /*
-         Cas 1 :
-            le mois de naissance n’est pas encore arrivé
-        Cas 2 :
-            on est dans le même mois
-            mais le jour de naissance n’est pas encore passé
-                    */
-        if(monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())){
+        if(m < 0 || (m === 0 && today.getDate() < birth.getDate())){
             age--;
         }
 
@@ -88,13 +68,10 @@ document.getElementById("registerForm").addEventListener("submit", function(e) {
         }
     }
 
-    //  6. affichage erreurs
+    // 8. STOP OR SUBMIT
     if(errors.length > 0){
+        e.preventDefault(); // only block if errors exist
         alert(errors.join("\n"));
         return;
     }
-
-    // ✅ succès
-    alert("Inscription réussie !");
-    this.submit(); //envoie le formulaire si tout est bon
 });

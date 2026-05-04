@@ -20,7 +20,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap:10px;
+    gap:20px;
     padding-top: 150px;
     border-radius: 20px;
 }
@@ -92,4 +92,15 @@ body {
 
 #theContextOfUser{
     color:#202020;
+}
+
+
+#logoutButton{
+    background-color: red;
+    color: white;
+    border-radius: 20px;
+    border: none;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
 }
