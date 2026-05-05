@@ -78,6 +78,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <input placeholder="gmail :" id="gmail" name="gmail" type="email"
            value="<?= htmlspecialchars($_POST['gmail'] ?? '') ?>">
 
+
+
+
+           
+
     <input id="password" placeholder="password :" name="password" type="password">
 
     <input id="passwordAgain" placeholder="password again:" name="passwordAgain" type="password">

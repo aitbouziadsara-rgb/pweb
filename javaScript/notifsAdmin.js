@@ -1,15 +1,15 @@
 document.getElementById("accountManagementButton").addEventListener("click", function() {
-    window.location.href = "gestionnaireDeCompte.html";
+    window.location.href = "gestionnaireDeCompte.php";
 });
 
 document.getElementById("notifsButton2").addEventListener("click", function() {
-    window.location.href = "notifsAdmin.html";
+    window.location.href = "notifsAdmin.php";
 });
 
 document.getElementById("resultsButton2").addEventListener("click", function() {
-    window.location.href = "resultatsAdmin.html";
+    window.location.href = "resultatsAdmin.php";
 });
 
 document.getElementById("lotteryMakingButton").addEventListener("click", function() {
-    window.location.href = "lotteryMaking.html";
+    window.location.href = "lotteryMaking.php";
 });

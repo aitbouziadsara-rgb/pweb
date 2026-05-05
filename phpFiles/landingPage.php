@@ -53,7 +53,7 @@ $lastWinners = $conn->query("
                     login
                 </button>
                 <button id="signInButton"
-                        onclick="window.location='signup.php'">
+                      onclick="window.location='signIn.php'">
                     sign in
                 </button>
             </div>

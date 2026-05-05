@@ -40,7 +40,7 @@ document.getElementById("registerForm").addEventListener("submit", function(e) {
     if(cin && !/^[0-9]{18}$/.test(cin)){
         errors.push("CIN doit contenir 18 chiffres");
     }
-S
+
     // 5. email
     if(email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
         errors.push("Email invalide");

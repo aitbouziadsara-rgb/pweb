@@ -4,7 +4,7 @@ document.getElementById("buttonLogIn").addEventListener("click", function() {
  if (!email.includes("@")) {
     alert("Please enter a valid email address.");
  } else {
-    window.location.href = "profilUser.html";
+    window.location.href = "profilUser.php";
  }
     
 });

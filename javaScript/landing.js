@@ -1,7 +1,7 @@
 document.getElementById("signInButton").addEventListener("click", function() {
-    window.location.href = "signIn.html";
+    window.location.href = "signIn.php";
 });
 
 document.getElementById("loginButton").addEventListener("click", function() {
-    window.location.href = "login.html";
+    window.location.href = "login.php";
 });
