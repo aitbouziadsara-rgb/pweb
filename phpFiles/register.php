@@ -117,7 +117,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user_id = $conn->insert_id;
     $_SESSION["user"] = ["id" => $user_id];
     unset($_SESSION["temp_user"]);
-    header("Location: profileUser.php");
+    header("Location: profilUser.php");
     exit;
     } else {
     $error = "Erreur lors de l'inscription. Veuillez réessayer.";
