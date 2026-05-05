@@ -2,7 +2,8 @@
 session_start();
 
 if (isset($_GET["logout"])) {
-    unset($_SESSION["admin"]);
+    session_unset();
+    session_destroy();
     header("Location: login.php");
     exit;
 }
@@ -20,7 +21,7 @@ if (isset($_SESSION["admin"])) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // =========================
-    // 1. GET + CLEAN INPUT
+    // 1. INPUT
     // =========================
     $email    = trim($_POST["gmail"] ?? "");
     $password = $_POST["password"] ?? "";
@@ -35,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // =========================
-    // 3. CHECK USERS TABLE FIRST
+    // 3. USERS CHECK
     // =========================
     if (!isset($error)) {
         require_once "config.php";
@@ -51,20 +52,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->close();
 
         if ($user && password_verify($password, $user["password_hash"])) {
-            // found in users table
+
             if ($user["status"] === "pending") {
                 $error = "Votre compte est en attente de validation";
             } elseif ($user["status"] === "blocked") {
                 $error = "Votre compte a été bloqué";
             } else {
-                // active user → login
+
+                session_regenerate_id(true);
                 $_SESSION["user"] = ["id" => $user["id"]];
+
                 header("Location: profileUser.php");
                 exit;
             }
+
         } else {
+
             // =========================
-            // 4. NOT A USER → CHECK ADMINS TABLE
+            // 4. ADMINS CHECK
             // =========================
             $stmt = $conn->prepare("
                 SELECT id, password_hash 
@@ -77,10 +82,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->close();
 
             if ($admin && password_verify($password, $admin["password_hash"])) {
-                // found in admins table
+
+                session_regenerate_id(true);
                 $_SESSION["admin"] = ["id" => $admin["id"]];
+
                 header("Location: gestionnaireDeCompte.php");
                 exit;
+
             } else {
                 $error = "Email ou mot de passe incorrect";
             }
@@ -97,7 +105,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
 
 <?php if (isset($error)): ?>
-    <p style="color:red;"><b><?= $error ?></b></p>
+    <p class="errorMsg"><?= $error ?></p>
+<?php endif; ?>
+
+<?php if (isset($_GET["registered"])): ?>
+    <p class="successMsg">
+        Account created successfully. Please log in.
+    </p>
 <?php endif; ?>
 
 <form action="login.php" method="POST" id="loginFlex">
@@ -113,6 +127,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 </form>
 
-<script src="../javaScript/login.js"></script>
+<div class="extraLinks">
+    <p><a href="signIn.php">Sign up</a></p>
+    <p><a href="landingPage.php">Back to home</a></p>
+</div>
+
+<script src="../JSFiles/login.js"></script>
 </body>
 </html>

@@ -1,15 +1,7 @@
 <?php
 session_start();
 
-// If already logged in → redirect directly
-if (isset($_SESSION["user"])) {
-    header("Location: profileUser.php");
-    exit;
-}
-if (isset($_SESSION["admin"])) {
-    header("Location: gestionnaireDeCompte.php");
-    exit;
-}
+
 
 require_once "config.php";
 
@@ -110,6 +102,6 @@ $lastWinners = $conn->query("
 
 </div>
 
-<script src="../javaScript/landing.js"></script>
+
 </body>
 </html>

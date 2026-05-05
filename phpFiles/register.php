@@ -41,6 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $birth = new DateTime($birthdate);
         $today = new DateTime();
         $age   = $today->diff($birth)->y;
+
         if ($age < 18) {
             $error = "Vous devez avoir au moins 18 ans";
         }
@@ -59,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // =========================
-    // 3. CHECK CIN + EMAIL NOT ALREADY USED
+    // 3. CHECK CIN + EMAIL
     // =========================
     if (!isset($error)) {
         require_once "config.php";
@@ -69,6 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bind_param("s", $cin);
         $stmt->execute();
         $stmt->store_result();
+
         if ($stmt->num_rows > 0) {
             $error = "Ce CIN est déjà utilisé";
         }
@@ -81,6 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $stmt->store_result();
+
         if ($stmt->num_rows > 0) {
             $error = "Cet email est déjà utilisé";
         }
@@ -91,6 +94,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // 4. INSERT INTO DATABASE
     // =========================
     if (!isset($error)) {
+
+        require_once "config.php";
+
         $hashed_password = $_SESSION["temp_user"]["password"];
 
         $stmt = $conn->prepare("
@@ -113,17 +119,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $hashed_password
         );
 
-    if ($stmt->execute()) {
-    $user_id = $conn->insert_id;
-    $_SESSION["user"] = ["id" => $user_id];
-    unset($_SESSION["temp_user"]);
-    header("Location: profilUser.php");
-    exit;
-    } else {
-    $error = "Erreur lors de l'inscription. Veuillez réessayer.";
-}
+        if ($stmt->execute()) {
 
-$stmt->close();
+            $user_id = $conn->insert_id;
+
+            // cleanup session
+            unset($_SESSION["temp_user"]);
+            $_SESSION["pending_user_id"] = $user_id;
+
+            header("Location: login.php?registered=success");
+            exit;
+
+        } else {
+            $error = "Erreur lors de l'inscription. Veuillez réessayer.";
+        }
+
+        $stmt->close();
     }
 }
 ?>
@@ -143,31 +154,31 @@ $stmt->close();
 
     <h1 id="userInfoTitle">Enter your informations</h1>
 
-    <input class="userInfo" id="nom_prenom" name="nom_prenom" type="text" placeholder="Nom et prénom"
+    <input class="userInfo" name="nom_prenom" type="text" placeholder="Nom et prénom"
            value="<?= htmlspecialchars($_POST['nom_prenom'] ?? '') ?>">
 
-    <input class="userInfo" id="cin" name="cin" type="text" placeholder="Numéro d'identification national"
+    <input class="userInfo" name="cin" type="text" placeholder="Numéro d'identification national"
            value="<?= htmlspecialchars($_POST['cin'] ?? '') ?>">
 
-    <input class="userInfo" id="prenom_pere" name="prenom_pere" type="text" placeholder="Prénom du père"
+    <input class="userInfo" name="prenom_pere" type="text" placeholder="Prénom du père"
            value="<?= htmlspecialchars($_POST['prenom_pere'] ?? '') ?>">
 
-    <input class="userInfo" id="prenom_grand_pere" name="prenom_grand_pere" type="text" placeholder="Prénom du grand-père"
+    <input class="userInfo" name="prenom_grand_pere" type="text" placeholder="Prénom du grand-père"
            value="<?= htmlspecialchars($_POST['prenom_grand_pere'] ?? '') ?>">
 
-    <input class="userInfo" id="prenom_nom_mere" name="prenom_nom_mere" type="text" placeholder="Prénom et nom de la mère"
+    <input class="userInfo" name="prenom_nom_mere" type="text" placeholder="Prénom et nom de la mère"
            value="<?= htmlspecialchars($_POST['prenom_nom_mere'] ?? '') ?>">
 
-    <input class="userInfo" id="birthdate" name="birthdate" type="date"
+    <input class="userInfo" name="birthdate" type="date"
            value="<?= htmlspecialchars($_POST['birthdate'] ?? '') ?>">
 
-    <input class="userInfo" id="address" name="address" type="text" placeholder="Adresse"
+    <input class="userInfo" name="address" type="text" placeholder="Adresse"
            value="<?= htmlspecialchars($_POST['address'] ?? '') ?>">
 
-    <input class="userInfo" id="email" name="email" type="email" placeholder="Email"
+    <input class="userInfo" name="email" type="email" placeholder="Email"
            value="<?= htmlspecialchars($_POST['email'] ?? '') ?>">
 
-    <input class="userInfo" id="phone" name="phone" type="text" placeholder="Téléphone"
+    <input class="userInfo" name="phone" type="text" placeholder="Téléphone"
            value="<?= htmlspecialchars($_POST['phone'] ?? '') ?>">
 
     <button type="submit" id="registerButton">Register</button>

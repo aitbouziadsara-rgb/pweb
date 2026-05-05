@@ -80,6 +80,6 @@ if ($tirage) {
     </div>
 </div>
 
-<script src="../javaScript/resultsAdmin.js"></script>
+
 </body>
 </html>

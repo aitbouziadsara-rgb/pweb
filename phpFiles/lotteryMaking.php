@@ -305,6 +305,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 </div>
 
-<script src="../javaScript/lotteryMaking.js"></script>
+
 </body>
 </html>

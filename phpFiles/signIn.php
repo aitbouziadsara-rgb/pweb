@@ -1,6 +1,16 @@
 <?php
 session_start();
 
+// If already logged in → redirect
+if (isset($_SESSION["user"])) {
+    header("Location: profileUser.php");
+    exit;
+}
+if (isset($_SESSION["admin"])) {
+    header("Location: gestionnaireDeCompte.php");
+    exit;
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // =========================
@@ -81,7 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 
-           
+
 
     <input id="password" placeholder="password :" name="password" type="password">
 

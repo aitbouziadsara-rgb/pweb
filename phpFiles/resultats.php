@@ -100,11 +100,14 @@ if ($tirage) {
                     <?php endwhile; ?>
                 <?php endif; ?>
             </div>
+
+
+
         <?php endif; ?>
 
     </div>
 </div>
 
-<script src="../javaScript/results.js"></script>
+
 </body>
 </html>

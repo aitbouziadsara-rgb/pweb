@@ -94,6 +94,6 @@ $stmt->close();
     </div>
 </div>
 
-<script src="../javaScript/notifs.js"></script>
+
 </body>
 </html>

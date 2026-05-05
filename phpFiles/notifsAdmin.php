@@ -81,6 +81,6 @@ $unread = $conn->query("
     </div>
 </div>
 
-<script src="../javaScript/notifsAdmin.js"></script>
+
 </body>
 </html>
